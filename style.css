@@ -43,7 +43,7 @@ section {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 150px 20px;
+  padding: 80px 20px;
   text-align: center;
   color: white;
 }
@@ -59,7 +59,8 @@ section {
     margin-right: auto;
 }
 .hero p {
-    font-weight: 600;
+    font-weight: 400;
+    color: white;
 }
 
 .hero__subtitle {
@@ -69,6 +70,49 @@ section {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+}
+.hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero__contacts {
+    text-align: right;
+}
+
+.hero__phone {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.hero__email {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+@media screen and (max-width: 768px) {
+    .hero__top {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 40px;
+    }
+    .hero__contacts {
+        text-align: center;
+    }
 }
 
 .btn {
@@ -91,7 +135,6 @@ section {
     color: #fff;
 }
 
-/* Блок преимуществ */
 .benefits {
     background-color: #f5f7fa;
 }
