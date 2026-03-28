@@ -8,21 +8,23 @@
 </head>
 <body>
     <section class="hero">
-    <div class="container">
-        <!-- НОВЫЙ БЛОК: логотип и контакты -->
-        <div class="hero__top">
-            <div class="logo">MurashoffMebel</div>
-            <div class="hero__contacts">
-                <div class="hero__phone">+7 (918) 490-92-66</div>
-                <div class="hero__email">Murashoff.fasad@yandex.com</div>
+        <div class="container">
+            <div class="hero__top">
+                <div class="logo">МУРАШОВМЕБЕЛЬ</div>
+                <div class="hero__contacts">
+                    <div class="hero__phone">+7 (918) 490-92-66</div>
+                    <div class="hero__email">Murashoff.fasad@yandex.com</div>
+                </div>
+            </div>
+
+            <h1 class="hero__title">Крашеные фасады из МДФ</h1>
+            <p class="hero__subtitle">Идеальное решение для вашего производства: широкий выбор цветов RAL, любые размеры, быстрая доставка по России</p>
+            <div class="hero__buttons">
+                <a href="#catalog" class="btn">В каталог</a>
+                <button class="btn btn-outline" id="customOrderBtnHero">Индивидуальный заказ</button>
             </div>
         </div>
-
-        <h1 class="hero__title">Крашеные фасады из МДФ для мебельщиков</h1>
-        <p class="hero__subtitle">Идеальное решение для вашего производства: широкий выбор цветов RAL, любые размеры, быстрая доставка по России</p>
-        <a href="#catalog" class="btn">В каталог</a>
-    </div>
-</section>
+    </section>
 
     <section class="benefits">
         <div class="container">
@@ -116,6 +118,11 @@
         </div>
     </section>
 
+    <!-- Кнопка индивидуального заказа после каталога -->
+    <div class="container" style="text-align: center; margin: 40px auto 20px;">
+        <button class="btn btn-outline-dark btn-large" id="customOrderBtnAfterCatalog">Индивидуальный заказ</button>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -146,7 +153,7 @@
         </div>
     </footer>
 
-    <!-- Модальное окно -->
+    <!-- Модальное окно для заказа товара из каталога -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="modal">
             <div class="modal__header">
@@ -156,6 +163,7 @@
             <div class="modal__body">
                 <form id="orderForm">
                     <input type="hidden" id="productNameInput" name="product">
+                    <input type="hidden" name="form_type" value="catalog">
                     
                     <div class="form-group">
                         <label for="name">Имя *</label>
@@ -165,7 +173,7 @@
 
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (999) 999-99-99">
+                        <input type="tel" id="phone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
                         <span class="error-message" id="phoneError"></span>
                     </div>
 
@@ -189,6 +197,60 @@
             </div>
         </div>
     </div>
+
+    <!-- Модальное окно для индивидуального заказа -->
+    <div class="modal-overlay" id="customModalOverlay">
+        <div class="modal" id="customModal">
+            <div class="modal__header">
+                <h3 class="modal__title">Индивидуальный заказ</h3>
+                <button class="modal__close" id="customModalClose">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form id="customOrderForm">
+                    <input type="hidden" name="form_type" value="custom">
+                    
+                    <div class="form-group">
+                        <label for="customName">Имя *</label>
+                        <input type="text" id="customName" name="name" class="form-control" placeholder="Введите ваше имя">
+                        <span class="error-message" id="customNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customPhone">Телефон *</label>
+                        <input type="tel" id="customPhone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
+                        <span class="error-message" id="customPhoneError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customComment">Описание желаемого фасада</label>
+                        <textarea id="customComment" name="comment" class="form-control" rows="3" placeholder="Напишите размеры, цвет, материал и другие пожелания"></textarea>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="customConsent" name="consent">
+                        <label for="customConsent">Согласие на обработку персональных данных *</label>
+                        <span class="error-message" id="customConsentError"></span>
+                    </div>
+
+                    <button type="submit" class="btn modal__btn" id="customSubmitBtn">
+                        <span class="btn-text">Отправить заявку</span>
+                        <span class="spinner"></span>
+                    </button>
+                </form>
+                <div class="modal-message" id="customModalMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для увеличенного изображения -->
+<div class="modal-overlay" id="imageModalOverlay">
+    <div class="modal modal-image" id="imageModal">
+        <button class="modal-image__close" id="imageModalClose">&times;</button>
+        <div class="modal-image__body">
+            <img id="fullImage" src="" alt="Увеличенное изображение">
+        </div>
+    </div>
+</div>
 
     <script src="script.js"></script>
 </body>

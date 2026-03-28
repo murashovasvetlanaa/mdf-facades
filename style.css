@@ -622,4 +622,140 @@ textarea.form-control {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+}/* Группа кнопок в hero */
+.hero__buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Стиль для второй кнопки */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+}
+.btn-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Крупная кнопка после каталога */
+.btn-large {
+    padding: 14px 48px;
+    font-size: 1.1rem;
+}/* Кнопка с тёмной обводкой для светлого фона */
+.btn-outline-dark {
+    background-color: transparent;
+    border: 1px solid #2c3e50;
+    color: #2c3e50;
+}
+.btn-outline-dark:hover {
+    background-color: #2c3e50;
+    color: #fff;
+}.product-card__image {
+    overflow: hidden;
+}
+
+.product-card__image img {
+    transition: transform 0.4s ease;
+}
+
+.product-card__image:hover img {
+    transform: scale(1.1);
+}/* Модальное окно для увеличенного изображения */
+.modal-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    background-color: #fff;
+    padding: 0;
+}
+
+.modal-image__body {
+    padding: 0;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0 0 32px 32px;
+    overflow: hidden;
+}
+
+.modal-image__body img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}/* Модальное окно для увеличенного изображения */
+.modal-image {
+    max-width: 90vw;
+    width: 90vw;
+    max-height: 90vh;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: scale(1) translateY(0);
+    overflow: visible;
+}
+
+.modal-image__body {
+    text-align: center;
+    background-color: transparent;
+    border-radius: 0;
+    overflow: visible;
+    padding: 0;
+}
+
+.modal-image__body img {
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-image__close {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    background: white;
+    border: none;
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #1e2b37;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1010;
+}
+
+.modal-image__close:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+    .modal-image {
+        width: 95vw;
+        max-width: 95vw;
+    }
+    .modal-image__close {
+        top: -50px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+    }
 }
