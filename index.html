@@ -11,17 +11,42 @@
         <div class="container">
             <div class="hero__top">
                 <div class="logo">МУРАШОВМЕБЕЛЬ</div>
+                <nav class="nav-links">
+                    <a href="#catalog" class="nav-link">Каталог</a>
+                    <a href="#about" class="nav-link">О компании</a>
+                    <a href="#contacts" class="nav-link">Контакты</a>
+                    <a href="#delivery" class="nav-link">Доставка</a>
+                </nav>
                 <div class="hero__contacts">
                     <div class="hero__phone">+7 (918) 490-92-66</div>
                     <div class="hero__email">Murashoff.fasad@yandex.com</div>
                 </div>
             </div>
-
             <h1 class="hero__title">Крашеные фасады из МДФ</h1>
             <p class="hero__subtitle">Идеальное решение для вашего производства: широкий выбор цветов RAL, любые размеры, быстрая доставка по России</p>
             <div class="hero__buttons">
                 <a href="#catalog" class="btn">В каталог</a>
                 <button class="btn btn-outline" id="customOrderBtnHero">Индивидуальный заказ</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="offer">
+        <div class="container">
+            <h2 class="section-title">Что мы предлагаем</h2>
+            <div class="offer__grid">
+                <div class="offer__card">
+                    <div class="offer__icon">📖</div>
+                    <h3 class="offer__title">Готовые фасады из каталога</h3>
+                    <p class="offer__desc">Более 20 стандартных размеров и цветов. Быстрая отгрузка, точные сроки — идеально для серийных заказов.</p>
+                    <a href="#catalog" class="offer__btn">Перейти в каталог →</a>
+                </div>
+                <div class="offer__card offer__card--accent">
+                    <div class="offer__icon">✏️</div>
+                    <h3 class="offer__title">Индивидуальные фасады по вашему ТЗ</h3>
+                    <p class="offer__desc">Любые размеры, фрезеровка, цвет RAL/NCS. Работаем по чертежам и эскизам. Срок — от 7 дней.</p>
+                    <button class="offer__btn offer__btn--outline" id="offerCustomBtn">Заказать индивидуальный →</button>
+                </div>
             </div>
         </div>
     </section>
@@ -54,71 +79,170 @@
         <div class="container">
             <h2 class="section-title">Каталог фасадов</h2>
             <div class="catalog__grid">
-                <!-- Карточка товара 1 -->
+                <!-- Карточка 1 -->
                 <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="images/fasad1.jpg" alt="Фасад Классика 1">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad1.png" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad1(2).png" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
                     </div>
-                    <h3 class="product-card__title">Фасад «Классика 1»</h3>
+                    <h3 class="product-card__title">Фасад «Мыло»</h3>
                     <p class="product-card__price">5 000 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: матовое</li>
+                        <li>Цвет: RAL 9016</li>
+                    </ul>
                     <p class="product-card__size">716×396</p>
                     <button class="product-card__btn">Заказать</button>
                 </div>
-                <!-- Карточка товара 2 -->
+                <!-- Карточка 2 -->
                 <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="images/fasad2.jpg" alt="Фасад Модерн 2">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad2(2).jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad2.jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
                     </div>
-                    <h3 class="product-card__title">Фасад «Модерн 2»</h3>
-                    <p class="product-card__price">4 500 ₽/м²</p>
+                    <h3 class="product-card__title">Фасад «Модерн»</h3>
+                    <p class="product-card__price">7 500 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: матовое</li>
+                        <li>Цвет: RAL 9016</li>
+                    </ul>
                     <p class="product-card__size">716×596</p>
                     <button class="product-card__btn">Заказать</button>
                 </div>
-                <!-- Карточка товара 3 -->
+                <!-- Карточка 3 -->
                 <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="images/fasad3.jpg" alt="Фасад Гранж">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad3.jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad3(2).jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
                     </div>
                     <h3 class="product-card__title">Фасад «Гранж»</h3>
-                    <p class="product-card__price">5 200 ₽/м²</p>
+                    <p class="product-card__price">7 300 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: глянец</li>
+                        <li>Цвет: RAL 7016</li>
+                    </ul>
                     <p class="product-card__size">716×496</p>
                     <button class="product-card__btn">Заказать</button>
                 </div>
-                <!-- Карточка товара 4 -->
+                <!-- Карточка 4 -->
                 <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="images/fasad4.jpg" alt="Фасад Лофт">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad4(2).jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad4.jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
                     </div>
-                    <h3 class="product-card__title">Фасад «Лофт»</h3>
-                    <p class="product-card__price">4 800 ₽/м²</p>
+                    <h3 class="product-card__title">Фасад «Минимал»</h3>
+                    <p class="product-card__price">7 400 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: матовое</li>
+                        <li>Цвет: RAL 7004</li>
+                    </ul>
                     <p class="product-card__size">716×396</p>
                     <button class="product-card__btn">Заказать</button>
                 </div>
-                <!-- Карточка товара 5 -->
+                <!-- Карточка 5 -->
                 <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="images/fasad5.jpg" alt="Фасад Минимал">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad5(2).jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad5.jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
                     </div>
-                    <h3 class="product-card__title">Фасад «Минимал»</h3>
-                    <p class="product-card__price">5 500 ₽/м²</p>
+                    <h3 class="product-card__title">Фасад «Вельвет»</h3>
+                    <p class="product-card__price">7 350 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: глянец</li>
+                        <li>Цвет: RAL 7009</li>
+                    </ul>
                     <p class="product-card__size">716×596</p>
                     <button class="product-card__btn">Заказать</button>
                 </div>
-                <!-- Карточка товара 6 -->
+                <!-- Карточка 6 -->
                 <div class="product-card">
-                    <div class="product-card__image">
-                        <img src="images/fasad6.jpg" alt="Фасад Кантри">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad6.jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad6(2).jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
                     </div>
-                    <h3 class="product-card__title">Фасад «Кантри»</h3>
-                    <p class="product-card__price">4 900 ₽/м²</p>
+                    <h3 class="product-card__title">Фасад «Волна»</h3>
+                    <p class="product-card__price">7 770 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: матовый</li>
+                        <li>Цвет: RAL 7024</li>
+                    </ul>
                     <p class="product-card__size">716×496</p>
+                    <button class="product-card__btn">Заказать</button>
+                </div>
+                <!-- Карточка 7 -->
+                <div class="product-card">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad7(2).jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad7.jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
+                    </div>
+                    <h3 class="product-card__title">Фасад «Волна 2»</h3>
+                    <p class="product-card__price">7 450 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: матовый</li>
+                        <li>Цвет: RAL 9016</li>
+                    </ul>
+                    <p class="product-card__size">900×500 мм</p>
+                    <button class="product-card__btn">Заказать</button>
+                </div>
+                <!-- Карточка 8 -->
+                <div class="product-card">
+                    <div class="product-card__slider">
+                        <div class="slider-container">
+                            <img src="images/fasad8.jpg" alt="Фото 1" class="slider-img active">
+                            <img src="images/fasad8(2).jpg" alt="Фото 2" class="slider-img">
+                        </div>
+                        <button class="slider-btn prev-btn">‹</button>
+                        <button class="slider-btn next-btn">›</button>
+                    </div>
+                    <h3 class="product-card__title">Фасад «Квадро»</h3>
+                    <p class="product-card__price">7 000 ₽/м²</p>
+                    <ul class="product-card__specs">
+                        <li>Толщина: 19 мм</li>
+                        <li>Покрытие: матовое</li>
+                        <li>Цвет: RAL 7005</li>
+                    </ul>
+                    <p class="product-card__size">800×400 мм</p>
                     <button class="product-card__btn">Заказать</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Кнопка индивидуального заказа после каталога -->
     <div class="container" style="text-align: center; margin: 40px auto 20px;">
         <button class="btn btn-outline-dark btn-large" id="customOrderBtnAfterCatalog">Индивидуальный заказ</button>
     </div>
@@ -153,7 +277,7 @@
         </div>
     </footer>
 
-    <!-- Модальное окно для заказа товара из каталога -->
+    <!-- Модальные окна (оставлены без изменений) -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="modal">
             <div class="modal__header">
@@ -164,30 +288,25 @@
                 <form id="orderForm">
                     <input type="hidden" id="productNameInput" name="product">
                     <input type="hidden" name="form_type" value="catalog">
-                    
                     <div class="form-group">
                         <label for="name">Имя *</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Введите ваше имя">
                         <span class="error-message" id="nameError"></span>
                     </div>
-
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
                         <input type="tel" id="phone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
                         <span class="error-message" id="phoneError"></span>
                     </div>
-
                     <div class="form-group">
                         <label for="comment">Комментарий</label>
                         <textarea id="comment" name="comment" class="form-control" rows="3" placeholder="Ваши пожелания (необязательно)"></textarea>
                     </div>
-
                     <div class="form-group checkbox">
                         <input type="checkbox" id="consent" name="consent">
                         <label for="consent">Согласие на обработку персональных данных *</label>
                         <span class="error-message" id="consentError"></span>
                     </div>
-
                     <button type="submit" class="btn modal__btn" id="submitBtn">
                         <span class="btn-text">Отправить</span>
                         <span class="spinner"></span>
@@ -198,7 +317,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно для индивидуального заказа -->
     <div class="modal-overlay" id="customModalOverlay">
         <div class="modal" id="customModal">
             <div class="modal__header">
@@ -208,30 +326,25 @@
             <div class="modal__body">
                 <form id="customOrderForm">
                     <input type="hidden" name="form_type" value="custom">
-                    
                     <div class="form-group">
                         <label for="customName">Имя *</label>
                         <input type="text" id="customName" name="name" class="form-control" placeholder="Введите ваше имя">
                         <span class="error-message" id="customNameError"></span>
                     </div>
-
                     <div class="form-group">
                         <label for="customPhone">Телефон *</label>
                         <input type="tel" id="customPhone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
                         <span class="error-message" id="customPhoneError"></span>
                     </div>
-
                     <div class="form-group">
                         <label for="customComment">Описание желаемого фасада</label>
                         <textarea id="customComment" name="comment" class="form-control" rows="3" placeholder="Напишите размеры, цвет, материал и другие пожелания"></textarea>
                     </div>
-
                     <div class="form-group checkbox">
                         <input type="checkbox" id="customConsent" name="consent">
                         <label for="customConsent">Согласие на обработку персональных данных *</label>
                         <span class="error-message" id="customConsentError"></span>
                     </div>
-
                     <button type="submit" class="btn modal__btn" id="customSubmitBtn">
                         <span class="btn-text">Отправить заявку</span>
                         <span class="spinner"></span>
@@ -242,15 +355,14 @@
         </div>
     </div>
 
-    <!-- Модальное окно для увеличенного изображения -->
-<div class="modal-overlay" id="imageModalOverlay">
-    <div class="modal modal-image" id="imageModal">
-        <button class="modal-image__close" id="imageModalClose">&times;</button>
-        <div class="modal-image__body">
-            <img id="fullImage" src="" alt="Увеличенное изображение">
+    <div class="modal-overlay" id="imageModalOverlay">
+        <div class="modal modal-image" id="imageModal">
+            <button class="modal-image__close" id="imageModalClose">&times;</button>
+            <div class="modal-image__body">
+                <img id="fullImage" src="" alt="Увеличенное изображение">
+            </div>
         </div>
     </div>
-</div>
 
     <script src="script.js"></script>
 </body>
