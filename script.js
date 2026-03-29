@@ -1,286 +1,469 @@
-// script.js
+document.addEventListener('DOMContentLoaded', function () {
+  // Текущий год в футере
+  const yearSpan = document.getElementById('current-year');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Текущий год в футере
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+  // ---------- Общие вещи для форм ----------
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgaplgz';
+
+  // Маска телефона (формат +7 (XXX) XXX-XX-XX)
+  function setPhoneMask(value) {
+    let digits = value.replace(/\D/g, '');
+
+    if (digits.length > 0) {
+      if (digits[0] === '8') digits = '7' + digits.slice(1);
+      else if (digits[0] !== '7') digits = '7' + digits;
     }
 
-    // Элементы модального окна
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalClose = document.getElementById('modalClose');
-    const orderForm = document.getElementById('orderForm');
-    const productNameInput = document.getElementById('productNameInput');
-    const modalMessage = document.getElementById('modalMessage');
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText = submitBtn.querySelector('.btn-text');
-    const spinner = submitBtn.querySelector('.spinner');
+    if (digits.length > 11) digits = digits.slice(0, 11);
 
-    // Поля формы
-    const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
-    const commentInput = document.getElementById('comment');
-    const consentCheckbox = document.getElementById('consent');
-
-    // Ошибки
-    const nameError = document.getElementById('nameError');
-    const phoneError = document.getElementById('phoneError');
-    const consentError = document.getElementById('consentError');
-
-    // Formspree endpoint
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgaplgz';
-
-    // --- Строгая маска ввода телефона ---
-    function setPhoneMask(value) {
-        // Удаляем все нецифровые символы
-        let digits = value.replace(/\D/g, '');
-        
-        // Если первая цифра не 7 или 8, добавляем 7 (для российского формата)
-        if (digits.length > 0) {
-            if (digits[0] === '8') digits = '7' + digits.slice(1);
-            else if (digits[0] !== '7') digits = '7' + digits;
-        }
-        
-        // Ограничиваем до 11 цифр (7 + 10)
-        if (digits.length > 11) digits = digits.slice(0, 11);
-        
-        // Форматируем: +7 (XXX) XXX-XX-XX
-        let formatted = '';
-        if (digits.length > 0) {
-            formatted = '+7';
-            if (digits.length > 1) {
-                formatted += ' (' + digits.slice(1, 4);
-            }
-            if (digits.length >= 5) {
-                formatted += ') ' + digits.slice(4, 7);
-            }
-            if (digits.length >= 8) {
-                formatted += '-' + digits.slice(7, 9);
-            }
-            if (digits.length >= 10) {
-                formatted += '-' + digits.slice(9, 11);
-            }
-        }
-        return formatted;
+    let formatted = '';
+    if (digits.length > 0) {
+      formatted = '+7';
+      if (digits.length > 1) {
+        formatted += ' (' + digits.slice(1, 4);
+      }
+      if (digits.length >= 5) {
+        formatted += ') ' + digits.slice(4, 7);
+      }
+      if (digits.length >= 8) {
+        formatted += '-' + digits.slice(7, 9);
+      }
+      if (digits.length >= 10) {
+        formatted += '-' + digits.slice(9, 11);
+      }
     }
+    return formatted;
+  }
 
-    // Обработчик ввода с поддержкой позиции курсора
-    phoneInput.addEventListener('input', function(e) {
-        const cursorPos = e.target.selectionStart;
-        const oldValue = e.target.value;
-        const newValue = setPhoneMask(oldValue);
-        
-        if (oldValue !== newValue) {
-            e.target.value = newValue;
-            
-            // Корректировка позиции курсора после форматирования
-            // (упрощённо: стараемся сохранить позицию относительно цифр)
-            const digitsBefore = oldValue.slice(0, cursorPos).replace(/\D/g, '').length;
-            let newPos = 0;
-            let digitCount = 0;
-            for (let i = 0; i < newValue.length; i++) {
-                if (/\d/.test(newValue[i])) {
-                    digitCount++;
-                    if (digitCount === digitsBefore) {
-                        newPos = i + 1;
-                        break;
-                    }
-                }
+  function attachPhoneMask(input) {
+    if (!input) return;
+
+    input.addEventListener('input', function (e) {
+      const cursorPos = e.target.selectionStart;
+      const oldValue = e.target.value;
+      const newValue = setPhoneMask(oldValue);
+
+      if (oldValue !== newValue) {
+        e.target.value = newValue;
+
+        const digitsBefore = oldValue.slice(0, cursorPos).replace(/\D/g, '').length;
+        let newPos = 0;
+        let digitCount = 0;
+        for (let i = 0; i < newValue.length; i++) {
+          if (/\d/.test(newValue[i])) {
+            digitCount++;
+            if (digitCount === digitsBefore) {
+              newPos = i + 1;
+              break;
             }
-            if (newPos === 0 && digitsBefore > 0) newPos = newValue.length;
-            e.target.setSelectionRange(newPos, newPos);
+          }
         }
+        if (newPos === 0 && digitsBefore > 0) newPos = newValue.length;
+        e.target.setSelectionRange(newPos, newPos);
+      }
     });
 
-    // При потере фокуса можно проверить полное соответствие маски
-    phoneInput.addEventListener('blur', function() {
-        const digits = phoneInput.value.replace(/\D/g, '');
-        if (digits.length === 11 && digits[0] === '7') {
-            // Дополнительно форматируем на случай, если ввели недостаточно символов
-            phoneInput.value = setPhoneMask(phoneInput.value);
-        }
+    input.addEventListener('blur', function () {
+      const digits = input.value.replace(/\D/g, '');
+      if (digits.length === 11 && digits[0] === '7') {
+        input.value = setPhoneMask(input.value);
+      }
+    });
+  }
+
+  async function sendToFormspree(data) {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      body: formData,
+      headers: { Accept: 'application/json' },
     });
 
-    // Открытие модального окна при клике на кнопку "Заказать"
-    document.querySelectorAll('.product-card__btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const card = this.closest('.product-card');
-            const titleElem = card.querySelector('.product-card__title');
-            const productTitle = titleElem ? titleElem.textContent.trim() : 'Товар';
-            
-            productNameInput.value = productTitle;
-            
-            resetForm();
-            
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Ошибка отправки');
+    }
+
+    return response.json();
+  }
+
+  // ---------- Модалка заказа из каталога ----------
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  const orderForm = document.getElementById('orderForm');
+  const productNameInput = document.getElementById('productNameInput');
+  const modalMessage = document.getElementById('modalMessage');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+  const spinner = submitBtn ? submitBtn.querySelector('.spinner') : null;
+
+  const nameInput = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+  const commentInput = document.getElementById('comment');
+  const consentCheckbox = document.getElementById('consent');
+
+  const nameError = document.getElementById('nameError');
+  const phoneError = document.getElementById('phoneError');
+  const consentError = document.getElementById('consentError');
+
+  attachPhoneMask(phoneInput);
+
+  function openCatalogModal(productTitle) {
+    if (!modalOverlay) return;
+    if (productNameInput) productNameInput.value = productTitle || 'Товар';
+
+    resetCatalogForm();
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCatalogModal() {
+    if (!modalOverlay) return;
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    resetCatalogForm();
+    enableCatalogSubmit();
+  }
+
+  function resetCatalogForm() {
+    if (!orderForm) return;
+    orderForm.reset();
+    if (nameError) nameError.textContent = '';
+    if (phoneError) phoneError.textContent = '';
+    if (consentError) consentError.textContent = '';
+    if (modalMessage) modalMessage.textContent = '';
+  }
+
+  function disableCatalogSubmit() {
+    if (!submitBtn) return;
+    submitBtn.disabled = true;
+    if (btnText) btnText.style.display = 'none';
+    if (spinner) spinner.style.display = 'inline-block';
+  }
+
+  function enableCatalogSubmit() {
+    if (!submitBtn) return;
+    submitBtn.disabled = false;
+    if (btnText) btnText.style.display = 'inline';
+    if (spinner) spinner.style.display = 'none';
+  }
+
+  function validateCatalogForm() {
+    let isValid = true;
+
+    if (!nameInput.value.trim()) {
+      nameError.textContent = 'Введите имя';
+      isValid = false;
+    } else {
+      nameError.textContent = '';
+    }
+
+    const phoneDigits = phoneInput.value.replace(/\D/g, '');
+    if (phoneDigits.length !== 11 || phoneDigits[0] !== '7') {
+      phoneError.textContent = 'Введите корректный номер: +7 (XXX) XXX-XX-XX';
+      isValid = false;
+    } else {
+      phoneError.textContent = '';
+    }
+
+    if (!consentCheckbox.checked) {
+      consentError.textContent = 'Необходимо согласие на обработку данных';
+      isValid = false;
+    } else {
+      consentError.textContent = '';
+    }
+
+    return isValid;
+  }
+
+  if (orderForm) {
+    orderForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!validateCatalogForm()) return;
+
+      const data = {
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        comment: commentInput.value.trim(),
+        product: productNameInput.value,
+        consent: consentCheckbox.checked ? 'on' : 'off',
+        form_type: 'catalog',
+      };
+
+      disableCatalogSubmit();
+      modalMessage.textContent = '';
+
+      try {
+        await sendToFormspree(data);
+        orderForm.style.display = 'none';
+        modalMessage.textContent = 'Спасибо, заявка отправлена!';
+
+        setTimeout(() => {
+          closeCatalogModal();
+          orderForm.style.display = 'block';
+        }, 2000);
+      } catch (error) {
+        modalMessage.textContent = 'Ошибка: ' + error.message;
+        enableCatalogSubmit();
+      }
     });
+  }
 
-    // Закрытие модального окна
-    function closeModal() {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-        resetForm();
-        enableSubmitButton();
-    }
+  if (modalClose) {
+    modalClose.addEventListener('click', closeCatalogModal);
+  }
 
-    function resetForm() {
-        orderForm.reset();
-        nameError.textContent = '';
-        phoneError.textContent = '';
-        consentError.textContent = '';
-        modalMessage.textContent = '';
-        // Специально не очищаем телефон, т.к. reset справляется
-    }
-
-    function disableSubmitButton() {
-        submitBtn.disabled = true;
-        btnText.style.display = 'none';
-        spinner.style.display = 'inline-block';
-    }
-
-    function enableSubmitButton() {
-        submitBtn.disabled = false;
-        btnText.style.display = 'inline';
-        spinner.style.display = 'none';
-    }
-
-    modalClose.addEventListener('click', closeModal);
-
-    modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) {
-            closeModal();
-        }
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function (e) {
+      if (e.target === modalOverlay) closeCatalogModal();
     });
+  }
 
-    // Валидация формы (строгая)
-    function validateForm() {
-        let isValid = true;
+  // Открытие модалки по кнопке "Заказать" в карточках
+  document.querySelectorAll('.product-card__btn').forEach((btn) => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const card = this.closest('.product-card');
+      const titleElem = card ? card.querySelector('.product-card__title') : null;
+      const productTitle = titleElem ? titleElem.textContent.trim() : 'Товар';
+      openCatalogModal(productTitle);
+    });
+  });
 
-        // Имя
-        if (!nameInput.value.trim()) {
-            nameError.textContent = 'Введите имя';
-            isValid = false;
-        } else {
-            nameError.textContent = '';
-        }
+  // Закрытие по Esc
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (modalOverlay && modalOverlay.classList.contains('active')) {
+        closeCatalogModal();
+      }
+      if (customModalOverlay && customModalOverlay.classList.contains('active')) {
+        closeCustomModal();
+      }
+      if (imageModalOverlay && imageModalOverlay.classList.contains('active')) {
+        closeImageModal();
+      }
+    }
+  });
 
-        // Телефон: проверка, что после +7 ровно 10 цифр и маска соблюдена
-        const phoneDigits = phoneInput.value.replace(/\D/g, '');
-        if (phoneDigits.length !== 11 || phoneDigits[0] !== '7') {
-            phoneError.textContent = 'Введите корректный номер: +7 (XXX) XXX-XX-XX';
-            isValid = false;
-        } else {
-            phoneError.textContent = '';
-        }
+  // ---------- Модалка ИНДИВИДУАЛЬНОГО заказа ----------
+  const customModalOverlay = document.getElementById('customModalOverlay');
+  const customModal = document.getElementById('customModal');
+  const customModalClose = document.getElementById('customModalClose');
+  const customOrderForm = document.getElementById('customOrderForm');
 
-        // Чекбокс
-        if (!consentCheckbox.checked) {
-            consentError.textContent = 'Необходимо согласие на обработку данных';
-            isValid = false;
-        } else {
-            consentError.textContent = '';
-        }
+  const customNameInput = document.getElementById('customName');
+  const customPhoneInput = document.getElementById('customPhone');
+  const customCommentInput = document.getElementById('customComment');
+  const customConsentCheckbox = document.getElementById('customConsent');
 
-        return isValid;
+  const customNameError = document.getElementById('customNameError');
+  const customPhoneError = document.getElementById('customPhoneError');
+  const customConsentError = document.getElementById('customConsentError');
+
+  const customSubmitBtn = document.getElementById('customSubmitBtn');
+  const customBtnText = customSubmitBtn ? customSubmitBtn.querySelector('.btn-text') : null;
+  const customSpinner = customSubmitBtn ? customSubmitBtn.querySelector('.spinner') : null;
+
+  const customOrderBtnHero = document.getElementById('customOrderBtnHero');
+  const customOrderBtnAfterCatalog = document.getElementById('customOrderBtnAfterCatalog');
+  const offerCustomBtn = document.getElementById('offerCustomBtn');
+
+  attachPhoneMask(customPhoneInput);
+
+  function openCustomModal() {
+    if (!customModalOverlay) return;
+    resetCustomForm();
+    customModalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCustomModal() {
+    if (!customModalOverlay) return;
+    customModalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    resetCustomForm();
+    enableCustomSubmit();
+  }
+
+  function resetCustomForm() {
+    if (!customOrderForm) return;
+    customOrderForm.reset();
+    if (customNameError) customNameError.textContent = '';
+    if (customPhoneError) customPhoneError.textContent = '';
+    if (customConsentError) customConsentError.textContent = '';
+    const msg = document.getElementById('customModalMessage');
+    if (msg) msg.textContent = '';
+  }
+
+  function disableCustomSubmit() {
+    if (!customSubmitBtn) return;
+    customSubmitBtn.disabled = true;
+    if (customBtnText) customBtnText.style.display = 'none';
+    if (customSpinner) customSpinner.style.display = 'inline-block';
+  }
+
+  function enableCustomSubmit() {
+    if (!customSubmitBtn) return;
+    customSubmitBtn.disabled = false;
+    if (customBtnText) customBtnText.style.display = 'inline';
+    if (customSpinner) customSpinner.style.display = 'none';
+  }
+
+  function validateCustomForm() {
+    let isValid = true;
+
+    if (!customNameInput.value.trim()) {
+      customNameError.textContent = 'Введите имя';
+      isValid = false;
+    } else {
+      customNameError.textContent = '';
     }
 
-    // Отправка на Formspree
-    async function submitForm(data) {
-        const formData = new FormData();
-        formData.append('name', data.name);
-        formData.append('phone', data.phone);
-        formData.append('comment', data.comment);
-        formData.append('product', data.product);
-        formData.append('consent', data.consent ? 'on' : 'off');
-
-        const response = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.error || 'Ошибка отправки');
-        }
-
-        return response.json();
+    const phoneDigits = customPhoneInput.value.replace(/\D/g, '');
+    if (phoneDigits.length !== 11 || phoneDigits[0] !== '7') {
+      customPhoneError.textContent = 'Введите корректный номер: +7 (XXX) XXX-XX-XX';
+      isValid = false;
+    } else {
+      customPhoneError.textContent = '';
     }
 
-    // Обработка отправки
-    orderForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
+    if (!customConsentCheckbox.checked) {
+      customConsentError.textContent = 'Необходимо согласие на обработку данных';
+      isValid = false;
+    } else {
+      customConsentError.textContent = '';
+    }
 
-        if (!validateForm()) {
-            return;
-        }
+    return isValid;
+  }
 
-        const formData = {
-            name: nameInput.value.trim(),
-            phone: phoneInput.value.trim(),
-            comment: commentInput.value.trim(),
-            product: productNameInput.value,
-            consent: consentCheckbox.checked
-        };
+  if (customOrderForm) {
+    customOrderForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!validateCustomForm()) return;
 
-        disableSubmitButton();
-        modalMessage.textContent = '';
+      const msg = document.getElementById('customModalMessage');
 
-        try {
-            await submitForm(formData);
+      const data = {
+        name: customNameInput.value.trim(),
+        phone: customPhoneInput.value.trim(),
+        comment: customCommentInput.value.trim(),
+        consent: customConsentCheckbox.checked ? 'on' : 'off',
+        form_type: 'custom',
+      };
 
-            orderForm.style.display = 'none';
-            modalMessage.textContent = 'Спасибо, заявка отправлена!';
+      disableCustomSubmit();
+      if (msg) msg.textContent = '';
 
-            setTimeout(() => {
-                closeModal();
-                orderForm.style.display = 'block';
-            }, 2000);
+      try {
+        await sendToFormspree(data);
+        customOrderForm.style.display = 'none';
+        if (msg) msg.textContent = 'Спасибо, заявка отправлена!';
 
-        } catch (error) {
-            modalMessage.textContent = 'Ошибка: ' + error.message;
-            enableSubmitButton();
-        }
+        setTimeout(() => {
+          closeCustomModal();
+          customOrderForm.style.display = 'block';
+        }, 2000);
+      } catch (error) {
+        if (msg) msg.textContent = 'Ошибка: ' + error.message;
+        enableCustomSubmit();
+      }
     });
+  }
 
-    // При закрытии модалки возвращаем форму
-    modalOverlay.addEventListener('transitionend', function() {
-        if (!modalOverlay.classList.contains('active')) {
-            orderForm.style.display = 'block';
-            enableSubmitButton();
-        }
+  if (customModalClose) {
+    customModalClose.addEventListener('click', closeCustomModal);
+  }
+
+  if (customModalOverlay) {
+    customModalOverlay.addEventListener('click', function (e) {
+      if (e.target === customModalOverlay) closeCustomModal();
     });
-// Переключение фотографий в карточках товаров (с двумя кнопками)
-document.querySelectorAll('.product-card__slider').forEach(slider => {
+  }
+
+  if (customOrderBtnHero) {
+    customOrderBtnHero.addEventListener('click', openCustomModal);
+  }
+  if (customOrderBtnAfterCatalog) {
+    customOrderBtnAfterCatalog.addEventListener('click', openCustomModal);
+  }
+  if (offerCustomBtn) {
+    offerCustomBtn.addEventListener('click', openCustomModal);
+  }
+
+  // ---------- Слайдер в карточках ----------
+  document.querySelectorAll('.product-card__slider').forEach((slider) => {
     const container = slider.querySelector('.slider-container');
-    const images = container.querySelectorAll('.slider-img');
+    const images = container ? container.querySelectorAll('.slider-img') : [];
     const prevBtn = slider.querySelector('.prev-btn');
     const nextBtn = slider.querySelector('.next-btn');
+
     if (!images.length || images.length <= 1) {
-        if (prevBtn) prevBtn.style.display = 'none';
-        if (nextBtn) nextBtn.style.display = 'none';
-        return;
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      return;
     }
+
     let current = 0;
+
     function showImage(index) {
-        images.forEach((img, i) => {
-            img.classList.toggle('active', i === index);
-        });
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
     }
-    prevBtn.addEventListener('click', () => {
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
         current = (current - 1 + images.length) % images.length;
         showImage(current);
-    });
-    nextBtn.addEventListener('click', () => {
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
         current = (current + 1) % images.length;
         showImage(current);
+      });
+    }
+  });
+
+  // ---------- Модалка увеличения картинки (если нужна) ----------
+  const imageModalOverlay = document.getElementById('imageModalOverlay');
+  const imageModalClose = document.getElementById('imageModalClose');
+  const fullImage = document.getElementById('fullImage');
+
+  function openImageModal(src, alt) {
+    if (!imageModalOverlay || !fullImage) return;
+    fullImage.src = src;
+    fullImage.alt = alt || 'Фасад';
+    imageModalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageModal() {
+    if (!imageModalOverlay) return;
+    imageModalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (imageModalOverlay) {
+    imageModalOverlay.addEventListener('click', function (e) {
+      if (e.target === imageModalOverlay) closeImageModal();
     });
-});
+  }
+  if (imageModalClose) {
+    imageModalClose.addEventListener('click', closeImageModal);
+  }
+
+  document.querySelectorAll('.slider-img').forEach((img) => {
+    img.addEventListener('click', () => {
+      openImageModal(img.src, img.alt);
+    });
+  });
 });
