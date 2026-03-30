@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function () {
     img.addEventListener('click', () => {
       openImageModal(img.src, img.alt);
     });
-  });
+    
   // Форма контактов
   const contactsForm = document.getElementById('contactsForm');
   if (contactsForm) {
