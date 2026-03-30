@@ -380,19 +380,19 @@
       <div class="contacts__info">
         <h3 class="contacts__block-title">Свяжитесь с нами</h3>
         <ul class="contacts__list">
-          >
+          
             <span class="contacts__icon">📞</span>
             <a href="tel:+79184909266" class="contacts__link">+7 (918) 490-92-66</a>
           </li>
-          >
+          
             <span class="contacts__icon">✉️</span>
             <a href="mailto:Murashoff.fasad@yandex.com" class="contacts__link">Murashoff.fasad@yandex.com</a>
           </li>
-          >
+          
             <span class="contacts__icon">📍</span>
             <span>г. Армавир, ул. Урицкого, 1</span>
           </li>
-          >
+          
             <span class="contacts__icon">🕐</span>
             <span>Пн–Пт: 9:00–18:00, Сб: 10:00–15:00</span>
           </li>
@@ -407,35 +407,40 @@
       </div>
 
       <div class="contacts__form-wrap">
-        <h3 class="contacts__block-title">Напишите нам</h3>
-        <form class="contacts__form" id="contactsForm">
-          <input type="hidden" name="form_type" value="contacts">
-          <div class="form-group">
-            abel for="contactsName">Имя <span class="required-star">*</span></label>
-            <input type="text" id="contactsName" name="name" class="form-control" placeholder="Ваше имя">
-            <span class="error-message" id="contactsNameError"></span>
-          </div>
-          <div class="form-group">
-            abel for="contactsPhone">Телефон <span class="required-star">*</span></label>
-            <input type="tel" id="contactsPhone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
-            <span class="error-message" id="contactsPhoneError"></span>
-          </div>
-          <div class="form-group">
-            abel for="contactsMsg">Сообщение</label>
-            <textarea id="contactsMsg" name="message" class="form-control" rows="3" placeholder="Опишите ваш вопрос"></textarea>
-          </div>
-          <div class="form-group checkbox">
-            <input type="checkbox" id="contactsConsent" name="consent">
-            abel for="contactsConsent">Согласие на обработку персональных данных <span class="required-star">*</span></label>
-            <span class="error-message" id="contactsConsentError"></span>
-          </div>
-          <button type="submit" class="modal__btn" id="contactsSubmitBtn">
-            <span class="btn-text">Отправить</span>
-            <span class="spinner" id="contactsSpinner"></span>
-          </button>
-          <p class="modal-message" id="contactsSuccess" style="display:none;">Спасибо! Свяжемся с вами в ближайшее время.</p>
-        </form>
-      </div>
+  <h3 class="contacts__block-title">Напишите нам</h3>
+  <form class="contacts__form" id="contactsForm">
+    <input type="hidden" name="form_type" value="contacts">
+
+    <div class="form-group">
+      <abel for="contactsName">Имя <span class="required-star">*</span></label>
+      <input type="text" id="contactsName" name="name" class="form-control" placeholder="Ваше имя">
+      <span class="error-message" id="contactsNameError"></span>
+    </div>
+
+    <div class="form-group">
+      <abel for="contactsPhone">Телефон <span class="required-star">*</span></label>
+      <input type="tel" id="contactsPhone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
+      <span class="error-message" id="contactsPhoneError"></span>
+    </div>
+
+    <div class="form-group">
+      <abel for="contactsMsg">Сообщение</label>
+      <textarea id="contactsMsg" name="message" class="form-control" rows="3" placeholder="Опишите ваш вопрос"></textarea>
+    </div>
+
+    <div class="form-group checkbox">
+      <input type="checkbox" id="contactsConsent" name="consent">
+      <abel for="contactsConsent">Согласие на обработку персональных данных <span class="required-star">*</span></label>
+      <span class="error-message" id="contactsConsentError"></span>
+    </div>
+
+    <button type="submit" class="modal__btn" id="contactsSubmitBtn">
+      <span class="btn-text">Отправить</span>
+      <span class="spinner" id="contactsSpinner"></span>
+    </button>
+    <p class="modal-message" id="contactsSuccess" style="display:none;">Спасибо! Свяжемся с вами в ближайшее время.</p>
+  </form>
+</div>
 
     </div>
   </div>
