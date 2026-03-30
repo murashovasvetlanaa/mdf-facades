@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function () {
       openImageModal(img.src, img.alt);
     });
   });
-});// Форма контактов
+// Форма контактов
 const contactsForm = document.getElementById('contactsForm');
 if (contactsForm) {
   attachPhoneMask(document.getElementById('contactsPhone'));
@@ -519,4 +519,4 @@ if (contactsForm) {
       spinner.style.display = 'none';
     }
   });
-}
+  })
