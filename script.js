@@ -517,6 +517,6 @@ if (contactsForm) {
     } finally {
       btn.disabled = false;
       spinner.style.display = 'none';
-    }
+      }
   });
-  })
+});
