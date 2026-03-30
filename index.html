@@ -295,6 +295,151 @@
       Индивидуальный заказ
     </button>
   </div>
+  <!-- О КОМПАНИИ -->
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">О компании</h2>
+    <div class="about__grid">
+
+      <div class="about__photo">
+        <img src="images/workshop.jpg" alt="Производственный цех крашеных фасадов из МДФ МУРАШОВ МЕБЕЛЬ Армавир" loading="lazy">
+      </div>
+
+      <div class="about__content">
+        <p class="about__text">
+          С 2015 года производим крашеные фасады из МДФ для мебельных цехов и фабрик по всей России. Работаем напрямую с производителями мебели — без посредников, с фиксированными сроками и допуском ±0,5 мм.
+        </p>
+        <p class="about__text">
+          Собственное производство в Армавире: фрезеровка, шлифовка, покраска в любой цвет по каталогу RAL и NCS. Матовое, глянцевое и софт-тач покрытие.
+        </p>
+        <div class="about__stats">
+          <div class="about__stat">
+            <span class="about__stat-number">10+</span>
+            <span class="about__stat-label">лет на рынке</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-number">500+</span>
+            <span class="about__stat-label">клиентов</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-number">1000+</span>
+            <span class="about__stat-label">выполненных заказов</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-number">50+</span>
+            <span class="about__stat-label">городов доставки</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ДОСТАВКА -->
+<section id="delivery" class="delivery">
+  <div class="container">
+    <h2 class="section-title">Доставка</h2>
+    <div class="delivery__grid">
+
+      <div class="delivery__card">
+        <div class="delivery__icon">🚚</div>
+        <h3 class="delivery__card-title">Транспортные компании</h3>
+        <p class="delivery__card-text">Отправляем через СДЭК, Деловые Линии, ПЭК, Байкал-Сервис — по вашему выбору. Заказ упакован в защитную плёнку и гофрокартон.</p>
+      </div>
+
+      <div class="delivery__card">
+        <div class="delivery__icon">📦</div>
+        <h3 class="delivery__card-title">Самовывоз из Армавира</h3>
+        <p class="delivery__card-text">Можно забрать самостоятельно по адресу: г. Армавир, ул. Урицкого, 1. Уведомим о готовности заранее.</p>
+      </div>
+
+      <div class="delivery__card">
+        <div class="delivery__icon">⏱️</div>
+        <h3 class="delivery__card-title">Сроки изготовления</h3>
+        <p class="delivery__card-text">Стандартные заказы — от 5 рабочих дней. Индивидуальные фасады по размерам — от 7 рабочих дней. Сроки фиксируем при оформлении.</p>
+      </div>
+
+      <div class="delivery__card">
+        <div class="delivery__icon">💳</div>
+        <h3 class="delivery__card-title">Оплата доставки</h3>
+        <p class="delivery__card-text">Доставку оплачивает покупатель по тарифам выбранной транспортной компании. Стоимость рассчитываем при оформлении заказа.</p>
+      </div>
+
+    </div>
+    <div class="delivery__note">
+      📍 Доставляем по Краснодарскому краю и по всей России. При заказе от 50 м² — согласовываем особые условия.
+    </div>
+  </div>
+</section>
+<!-- КОНТАКТЫ -->
+<section id="contacts" class="contacts">
+  <div class="container">
+    <h2 class="section-title">Контакты</h2>
+    <div class="contacts__grid">
+
+      <div class="contacts__info">
+        <h3 class="contacts__block-title">Свяжитесь с нами</h3>
+        <ul class="contacts__list">
+          >
+            <span class="contacts__icon">📞</span>
+            <a href="tel:+79184909266" class="contacts__link">+7 (918) 490-92-66</a>
+          </li>
+          >
+            <span class="contacts__icon">✉️</span>
+            <a href="mailto:Murashoff.fasad@yandex.com" class="contacts__link">Murashoff.fasad@yandex.com</a>
+          </li>
+          >
+            <span class="contacts__icon">📍</span>
+            <span>г. Армавир, ул. Урицкого, 1</span>
+          </li>
+          >
+            <span class="contacts__icon">🕐</span>
+            <span>Пн–Пт: 9:00–18:00, Сб: 10:00–15:00</span>
+          </li>
+        </ul>
+
+        <h3 class="contacts__block-title">Написать напрямую</h3>
+        <div class="contacts__messengers">
+          <a href="https://wa.me/79184909266" class="contacts__messenger contacts__messenger--wa" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://t.me/" class="contacts__messenger contacts__messenger--tg" target="_blank" rel="noopener">Telegram</a>
+          <a href="https://vk.com/" class="contacts__messenger contacts__messenger--vk" target="_blank" rel="noopener">ВКонтакте</a>
+        </div>
+      </div>
+
+      <div class="contacts__form-wrap">
+        <h3 class="contacts__block-title">Напишите нам</h3>
+        <form class="contacts__form" id="contactsForm">
+          <input type="hidden" name="form_type" value="contacts">
+          <div class="form-group">
+            abel for="contactsName">Имя <span class="required-star">*</span></label>
+            <input type="text" id="contactsName" name="name" class="form-control" placeholder="Ваше имя">
+            <span class="error-message" id="contactsNameError"></span>
+          </div>
+          <div class="form-group">
+            abel for="contactsPhone">Телефон <span class="required-star">*</span></label>
+            <input type="tel" id="contactsPhone" name="phone" class="form-control phone-input" placeholder="+7 (___) ___-__-__">
+            <span class="error-message" id="contactsPhoneError"></span>
+          </div>
+          <div class="form-group">
+            abel for="contactsMsg">Сообщение</label>
+            <textarea id="contactsMsg" name="message" class="form-control" rows="3" placeholder="Опишите ваш вопрос"></textarea>
+          </div>
+          <div class="form-group checkbox">
+            <input type="checkbox" id="contactsConsent" name="consent">
+            abel for="contactsConsent">Согласие на обработку персональных данных <span class="required-star">*</span></label>
+            <span class="error-message" id="contactsConsentError"></span>
+          </div>
+          <button type="submit" class="modal__btn" id="contactsSubmitBtn">
+            <span class="btn-text">Отправить</span>
+            <span class="spinner" id="contactsSpinner"></span>
+          </button>
+          <p class="modal-message" id="contactsSuccess" style="display:none;">Спасибо! Свяжемся с вами в ближайшее время.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
 
   <!-- ФУТЕР -->
   <footer class="footer" id="contacts">
