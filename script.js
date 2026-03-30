@@ -467,52 +467,45 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
   // Форма контактов
-  const contactsForm = document.getElementById('contactsForm');
-  if (contactsForm) {
-    attachPhoneMask(document.getElementById('contactsPhone'));
-    contactsForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      let valid = true;
-      const name = document.getElementById('contactsName');
-      const phone = document.getElementById('contactsPhone');
-      const consent = document.getElementById('contactsConsent');
-      document.getElementById('contactsNameError').textContent = '';
-      document.getElementById('contactsPhoneError').textContent = '';
-      document.getElementById('contactsConsentError').textContent = '';
-      if (!name.value.trim()) {
-        document.getElementById('contactsNameError').textContent = 'Введите имя';
-        valid = false;
-      }
-      const digits = phone.value.replace(/\D/g, '');
-      if (digits.length < 11) {
-        document.getElementById('contactsPhoneError').textContent = 'Введите полный номер телефона';
-        valid = false;
-      }
-      if (!consent.checked) {
-        document.getElementById('contactsConsentError').textContent = 'Необходимо согласие';
-        valid = false;
-      }
-      if (!valid) return;
-      const btn = document.getElementById('contactsSubmitBtn');
-      const spinner = document.getElementById('contactsSpinner');
-      btn.disabled = true;
-      spinner.style.display = 'inline-block';
-      try {
-        const data = new FormData(contactsForm);
-        await fetch('https://formspree.io/f/mjgaplgz', {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' }
-        });
-        contactsForm.reset();
-        document.getElementById('contactsSuccess').style.display = 'block';
-      } catch (err) {
-        alert('Ошибка отправки. Попробуйте ещё раз.');
-      } finally {
-        btn.disabled = false;
-        spinner.style.display = 'none';
-      }
-    });
-  }
+});
 
+function handleContactsForm(e) {
+  e.preventDefault();
+  const name = document.getElementById('contactsName');
+  const phone = document.getElementById('contactsPhone');
+  const consent = document.getElementById('contactsConsent');
+  document.getElementById('contactsNameError').textContent = '';
+  document.getElementById('contactsPhoneError').textContent = '';
+  document.getElementById('contactsConsentError').textContent = '';
+  let valid = true;
+  if (!name.value.trim()) {
+    document.getElementById('contactsNameError').textContent = 'Введите имя';
+    valid = false;
+  }
+  const digits = phone.value.replace(/\D/g, '');
+  if (digits.length < 11) {
+    document.getElementById('contactsPhoneError').textContent = 'Введите полный номер';
+    valid = false;
+  }
+  if (!consent.checked) {
+    document.getElementById('contactsConsentError').textContent = 'Необходимо согласие';
+    valid = false;
+  }
+  if (!valid) return;
+  const btn = document.getElementById('contactsSubmitBtn');
+  btn.disabled = true;
+  const form = document.getElementById('contactsForm');
+  fetch('https://formspree.io/f/mjgaplgz', {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { Accept: 'application/json' }
+  }).then(() => {
+    form.reset();
+    document.getElementById('contactsSuccess').style.display = 'block';
+  }).catch(() => {
+    alert('Ошибка. Попробуйте ещё раз.');
+  }).finally(() => {
+    btn.disabled = false;
+  });
+}
 });
