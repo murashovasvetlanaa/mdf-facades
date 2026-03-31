@@ -575,5 +575,52 @@ if (contactsForm) {
       if (submitBtn) submitBtn.disabled = false;
     }
   });
+}// ----- Кастомный тултип для цветовых кружков (работает на десктопе и мобильных) -----
+const colorTooltip = document.createElement('div');
+colorTooltip.className = 'color-tooltip';
+document.body.appendChild(colorTooltip);
+
+let tooltipTimeout;
+
+function showColorTooltip(element, colorName) {
+  const rect = element.getBoundingClientRect();
+  colorTooltip.textContent = colorName;
+  colorTooltip.style.left = `${rect.left + rect.width / 2}px`;
+  colorTooltip.style.top = `${rect.top - 10}px`;
+  colorTooltip.style.transform = 'translateX(-50%) translateY(-100%)';
+  colorTooltip.classList.add('visible');
 }
+
+function hideColorTooltip() {
+  colorTooltip.classList.remove('visible');
+  if (tooltipTimeout) clearTimeout(tooltipTimeout);
+}
+
+// Для каждого цветового кружка
+document.querySelectorAll('.color-swatch').forEach(swatch => {
+  // Сохраняем название цвета из title в data-color и удаляем стандартный title, чтобы не мешал
+  const colorName = swatch.getAttribute('title');
+  if (colorName) {
+    swatch.setAttribute('data-color', colorName);
+    swatch.removeAttribute('title');
+  }
+
+  // Наведение (для десктопа)
+  swatch.addEventListener('mouseenter', (e) => {
+    showColorTooltip(swatch, colorName);
+  });
+  swatch.addEventListener('mouseleave', () => {
+    hideColorTooltip();
+  });
+
+  // Клик/касание (для мобильных и десктопа)
+  swatch.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showColorTooltip(swatch, colorName);
+    if (tooltipTimeout) clearTimeout(tooltipTimeout);
+    tooltipTimeout = setTimeout(() => {
+      hideColorTooltip();
+    }, 2000);
+  });
+});
 });

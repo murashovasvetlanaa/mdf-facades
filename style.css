@@ -1521,4 +1521,23 @@ textarea.form-control {
   .product-card__colors {
     gap: 6px;
   }
+}/* Кастомный тултип для цветов */
+.color-tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: translateX(-50%) translateY(-100%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.color-tooltip.visible {
+  opacity: 1;
 }
