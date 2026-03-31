@@ -1315,4 +1315,182 @@ textarea.form-control {
   .contacts__grid { grid-template-columns: 1fr; gap: 36px; }
   .contacts__form-wrap { padding: 24px; }
 }
+/* Мобильная версия секции offer */
+@media (max-width: 768px) {
+    .offer {
+        padding: 50px 0 60px;
+    }
+    .offer__grid {
+        gap: 24px;
+    }
+    .offer__card {
+        padding: 30px 20px;
+        border-radius: 28px;
+        text-align: center;
+    }
+    .offer__title {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+    .offer__desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 24px;
+    }
+    .offer__btn,
+    .offer__btn--outline {
+        padding: 12px 24px;
+        font-size: 1rem;
+        width: auto;
+        display: inline-block;
+    }
+}@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 32px;
+    }
 
+    /* Карточки преимуществ */
+    .benefit-card {
+        padding: 24px 16px;
+    }
+    .benefit-card__title {
+        font-size: 1rem;
+        min-height: auto;
+    }
+    .benefit-card__text {
+        font-size: 0.85rem;
+    }
+
+    /* Карточки каталога */
+    .product-card {
+        padding: 16px;
+    }
+    .product-card__title {
+        font-size: 1.1rem;
+    }
+    .product-card__price {
+        font-size: 1.2rem;
+    }
+    .product-card__btn {
+        width: 120px;
+        padding: 8px 16px;
+    }
+
+    /* Секция "О компании" */
+    .about__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .about__stat {
+        padding: 16px 8px;
+    }
+    .about__stat-number {
+        font-size: 1.4rem;
+    }
+
+    /* Доставка */
+    .delivery__card {
+        padding: 24px 16px;
+    }
+    .delivery__card-title {
+        font-size: 0.95rem;
+    }
+    .delivery__card-text {
+        font-size: 0.85rem;
+    }
+
+    /* Контакты */
+    .contacts__form-wrap {
+        padding: 24px 20px;
+    }
+    .contacts__messenger {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}@media (max-width: 768px) {
+    .btn,
+    .product-card__btn,
+    .offer__btn,
+    .modal__btn,
+    .contacts__messenger {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}@media (max-width: 480px) {
+    .modal {
+        width: 95%;
+        max-width: 95%;
+        border-radius: 24px;
+    }
+    .modal__header {
+        padding: 20px 20px 12px;
+    }
+    .modal__body {
+        padding: 20px;
+    }
+    .modal__title {
+        font-size: 1.4rem;
+    }
+    .form-control {
+        padding: 12px 14px;
+    }
+    .modal__btn {
+        padding: 14px;
+    }
+}@media (max-width: 768px) {
+    .hero__top {
+        margin-bottom: 40px;
+    }
+    .nav-links {
+        gap: 20px;
+    }
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 8px 0;
+    }
+}/* Мобильная версия: блок "Что мы предлагаем" – одна колонка */
+@media (max-width: 768px) {
+  .offer__grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .offer__card {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 30px 24px !important;
+    box-sizing: border-box !important;
+  }
+}@media (max-width: 768px) {
+  .offer__card {
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .offer__card--accent {
+    background: #5a5856; /* или любой другой цвет, который нравится */
+  }
+
+  .offer__title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .offer__desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .offer__btn,
+  .offer__btn--outline {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    display: inline-block;
+    text-align: center;
+  }
+}
