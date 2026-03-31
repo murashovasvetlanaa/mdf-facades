@@ -508,4 +508,72 @@ function handleContactsForm(e) {
     btn.disabled = false;
   });
 }
+// ---------- ФОРМА КОНТАКТОВ (исправленная) ----------
+const contactsForm = document.getElementById('contactsForm');
+if (contactsForm) {
+  contactsForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('contactsName');
+    const phoneInput = document.getElementById('contactsPhone');
+    const consentCheck = document.getElementById('contactsConsent');
+    const nameError = document.getElementById('contactsNameError');
+    const phoneError = document.getElementById('contactsPhoneError');
+    const consentError = document.getElementById('contactsConsentError');
+    const successMsg = document.getElementById('contactsSuccess');
+    const submitBtn = document.getElementById('contactsSubmitBtn');
+
+    // Сброс ошибок и сообщения
+    if (nameError) nameError.textContent = '';
+    if (phoneError) phoneError.textContent = '';
+    if (consentError) consentError.textContent = '';
+    if (successMsg) successMsg.style.display = 'none';
+
+    // Валидация
+    let isValid = true;
+    if (!nameInput.value.trim()) {
+      if (nameError) nameError.textContent = 'Введите имя';
+      isValid = false;
+    }
+    const phoneDigits = phoneInput.value.replace(/\D/g, '');
+    if (phoneDigits.length !== 11) {
+      if (phoneError) phoneError.textContent = 'Введите корректный номер (11 цифр)';
+      isValid = false;
+    }
+    if (!consentCheck.checked) {
+      if (consentError) consentError.textContent = 'Необходимо согласие';
+      isValid = false;
+    }
+    if (!isValid) return;
+
+    // Блокировка кнопки
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      const formData = new FormData(contactsForm);
+      const response = await fetch('https://formspree.io/f/mjgaplgz', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Ошибка отправки');
+      }
+
+      // Успешная отправка
+      contactsForm.reset();
+      if (successMsg) successMsg.style.display = 'block';
+      setTimeout(() => {
+        if (successMsg) successMsg.style.display = 'none';
+      }, 5000);
+    } catch (error) {
+      console.error('Formspree error:', error);
+      alert('Не удалось отправить сообщение. Попробуйте позже или свяжитесь по телефону.');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+}
 });
