@@ -1494,3 +1494,31 @@ textarea.form-control {
     text-align: center;
   }
 }
+/* Цветовые кружки в карточках */
+.product-card__colors {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px 0 8px;
+  flex-wrap: wrap;
+}
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.color-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}@media (max-width: 480px) {
+  .color-swatch {
+    width: 24px;
+    height: 24px;
+  }
+  .product-card__colors {
+    gap: 6px;
+  }
+}
